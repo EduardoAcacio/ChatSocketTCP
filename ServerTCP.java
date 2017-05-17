@@ -30,18 +30,17 @@ public class ServerTCP {
 		System.out.println("Door 7777 is open");
 
 		while (true) {
-			//
+			//Mostra IP do Cliente conectado
 			Socket client = server.accept();
 			System.out.println("New connection is open with client: " +   
 					client.getInetAddress().getHostAddress());
 
-			// adiciona saida do cliente à lista
+			// adiciona saida do cliente Ã  lista
 			PrintStream ps = new PrintStream(client.getOutputStream());
 			this.clients.add(ps);
 
 			// cria tratador de cliente numa nova thread
-			ClearClient tc = 
-					new ClearClient(client.getInputStream(), this);
+			ClearClient tc = new ClearClient(client.getInputStream(), this);
 			new Thread(tc).start();
 		}
 	}
